@@ -1,35 +1,57 @@
 package spa.lyh.cn.android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
-    RelativeLayout rtl;
+    LinearLayout ll;
+
+    boolean isHide;
+
+    View statusBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        rtl = findViewById(R.id.rtl);
+        ll = findViewById(R.id.ll);
+        statusBar = findViewById(R.id.status_bar);
 
-        /*new Handler(getMainLooper()).postDelayed(new Runnable() {
+        new Handler(getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                setTranslucent();
-                rtl.setBackgroundColor(Color.WHITE);
+                ll.setVisibility(View.VISIBLE);
             }
-        },2000);*/
-
+        },2000);
+        setTranslucent();
+        ll.setBackgroundColor(Color.GRAY);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight());
+        statusBar.setLayoutParams(layoutParams);
+        isHide = true;
     }
 
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (isHide){
+            setSystemUiVisibility(getWindow().getDecorView(),
+                    View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY,
+                    true);
+        }
+    }
 
     /**
      * 非纯色状态栏，比如用图片进入状态栏位置，使用这个方法。如果纯色状态栏使用这个方法，效果与上面一致，但是不再
@@ -67,5 +89,14 @@ public class MainActivity extends AppCompatActivity {
         if (newVis != oldVis) {
             decorView.setSystemUiVisibility(newVis);
         }
+    }
+
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 }
