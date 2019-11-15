@@ -3,19 +3,18 @@
     <!--白色矩形 作为背景色-->
     <item>
     <shape android:shape="rectangle">
-    <solid android:color="#D02623" />
+    <!--<solid android:color="#D2231A" />-->
+    <solid android:color="#D11f13" />
     </shape>
     </item>
-    <item
-        android:top="122dp">
+    <item>
         <bitmap
-            android:gravity="top|fill_horizontal"
-            android:antialias="true"
-            android:src="@drawable/icon_logo" />
+            android:gravity="top|center_horizontal"
+            android:src="@drawable/splash_top"/>
     </item>
-    <item android:bottom="50dp">
+    <item>
         <bitmap
             android:gravity="bottom"
-            android:src="@drawable/icon_bottom" />
+            android:src="@drawable/splash_bottom" />
     </item>
 </layer-list>
