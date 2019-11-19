@@ -10,7 +10,12 @@
     <item>
         <bitmap
             android:gravity="top|center_horizontal"
-            android:src="@drawable/splash_top"/>
+            android:src="@drawable/splash_white"/>
+    </item>
+    <item android:top="155dp">
+        <bitmap
+            android:gravity="top|center_horizontal"
+            android:src="@drawable/splash_logo"/>
     </item>
     <item>
         <bitmap
