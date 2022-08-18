@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -38,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight());
         statusBar.setLayoutParams(layoutParams);
         isHide = true;
+
+        if (App.getInstance() == null){
+            Log.e("liyuhao","空的");
+        }else {
+            Log.e("liyuhao",App.getInstance().A());
+        }
     }
 
 
